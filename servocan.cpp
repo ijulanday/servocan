@@ -1,6 +1,6 @@
 #include "servocan.h"
 
-// range: 0 - 360
+// generic builder for write messages
 CAN_message_t genericWriteMessageBuilder(uint8_t address, uint8_t servoId, uint16_t data) {
     CAN_message_t msg;
     uint8_t lo = data & 0x00FF;
