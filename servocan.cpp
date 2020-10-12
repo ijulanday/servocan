@@ -22,5 +22,15 @@ CAN_message_t positionMessageBuilder(double usrAngle) {
 CAN_message_t turnMessageBuilder(int16_t rotations) {
     CAN_message_t msg;
     int8_t rotHi = rotations >> 8;
+    int8_t rotLo = rotations & 0x00FF;
+    msg.id = 0x000;
+    msg.buf[0] = 0x96;
+    msg.buf[1] = 0x00;  // servo id
+    msg.buf[2] = 0x24;  // address
+    msg.buf[3] = 0x02;  // reg length
+    msg.buf[4] = rotLo;  // data low
+    msg.buf[5] = rotHi;  // data high
+    // check sum (id + address + reg length + data low + data high) & 0xFF
+    msg.buf[6] = (msg.buf[1] + msg.buf[2] + msg.buf[3] + msg.buf[4] + msg.buf[5] ) & 0xFF;
     return msg;
-}
+} // TODO y this no work
