@@ -1,6 +1,6 @@
 #include "servocan.h"
 
-// generic  for write messages
+// generic for write messages
 CAN_message_t genericWriteMessage(uint8_t address, uint8_t servoId, uint16_t data) {
     CAN_message_t msg;
     uint8_t lo = data & 0x00FF;
@@ -14,6 +14,19 @@ CAN_message_t genericWriteMessage(uint8_t address, uint8_t servoId, uint16_t dat
     msg.buf[5] = hi;        // data high
     // check sum (id + address + reg length + data low + data high) & 0xFF
     msg.buf[6] = (msg.buf[1] + msg.buf[2] + msg.buf[3] + msg.buf[4] + msg.buf[5] ) & 0xFF;
+    return msg;
+}
+
+// generic for read messages
+CAN_message_t genericReadMessage(uint8_t address, uint8_t servoId) {
+    CAN_message_t msg;
+    msg.id = 0x000;
+    msg.buf[0] = 0x96;
+    msg.buf[1] = servoId;
+    msg.buf[2] = address;
+    msg.buf[3] = 0x00;
+    // check sum (id + address) & 0xFF
+    msg.buf[4] = (servoId + address) & 0xFF;
     return msg;
 }
 
@@ -56,3 +69,19 @@ CAN_message_t setPositionMin(uint8_t servoId, double minAngle) {
 CAN_message_t restoreFactoryDefault(uint8_t servoId) {
     return genericWriteMessage(0x6E, servoId, 0x0F0F);
 }
+
+// query for servo turn count
+CAN_message_t getTurnCount(uint8_t servoId) {
+    return genericReadMessage(0x18, servoId);
+}
+
+// query for low value of current position (0 - 65535, 4096 = 90 deg)
+CAN_message_t getPositionLo(uint8_t servoId) {
+    return genericReadMessage(0x1A, servoId);
+}  
+
+// query for high value of position (65535 - 2^31, 4096 = 90 deg)
+CAN_message_t getPositionHi(uint8_t servoId) {
+    return genericReadMessage(0x1C, servoId);
+}
+

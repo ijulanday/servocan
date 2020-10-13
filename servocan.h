@@ -11,4 +11,7 @@ CAN_message_t resetMessage(uint8_t servoId);
 CAN_message_t setPositionMax(uint8_t servoId, double maxAngle);
 CAN_message_t setPositionMin(uint8_t servoId, double minAngle);
 CAN_message_t restoreFactoryDefault(uint8_t servoId);
+CAN_message_t getTurnCount(uint8_t servoId);
+CAN_message_t getPositionLo(uint8_t servoId);
+CAN_message_t getPositionHi(uint8_t servoId);
 #endif
