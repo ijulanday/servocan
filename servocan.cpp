@@ -36,52 +36,52 @@ uint16_t genericDecoder(CAN_message_t msg) {
 }
 
 // moves servo to an angle from 0 to 360 degrees
-CAN_message_t positionMessage(uint8_t servoId, double usrAngle) {
+CAN_message_t REG_POSITION_NEW(uint8_t servoId, double usrAngle) {
     return genericWriteMessage(0x1E, servoId, uint16_t(round(usrAngle / 90.0 * 4096.0 )));
 }
 
 // +1 rotates servo 360 in the + direction
-CAN_message_t turnMessage(uint8_t servoId, int16_t rotations) {
+CAN_message_t REG_TURN_NEW(uint8_t servoId, int16_t rotations) {
     return genericWriteMessage(0x24, servoId, rotations);
 } // to enable you must change run mode to continuous, save the config, then restart the servo
 
 // 0: multi-turn mode, 1: servo mode
-CAN_message_t runModeMessage(uint8_t servoId, uint16_t mode) {
+CAN_message_t REG_RUN_MODE(uint8_t servoId, uint16_t mode) {
     return genericWriteMessage(0x44, servoId, mode);
 }
 
 // saves current reg values for reset
-CAN_message_t regConfigSave(uint8_t servoId) {
+CAN_message_t REG_CONFIG_SAVE(uint8_t servoId) {
     return genericWriteMessage(0x70, servoId, 0xFFFF);
 }
 
 // resets the servo
-CAN_message_t resetMessage(uint8_t servoId) {
+CAN_message_t REG_POWER_CONFIG(uint8_t servoId) {
     return genericWriteMessage(0x46, servoId, 0x0001);
 }
 
 // sets position max limit(s)
-CAN_message_t setPositionMax(uint8_t servoId, double maxAngle) {
+CAN_message_t REG_POS_MAX(uint8_t servoId, double maxAngle) {
     return genericWriteMessage(0xB0, servoId, maxAngle);
 }
 
 // sets position min limit(s)
-CAN_message_t setPositionMin(uint8_t servoId, double minAngle) {
+CAN_message_t REG_POS_MIN(uint8_t servoId, double minAngle) {
     return genericWriteMessage(0xB2, servoId, minAngle);
 }
 
 // restore factory default
-CAN_message_t restoreFactoryDefault(uint8_t servoId) {
+CAN_message_t REG_FACTORY_DEFAULT(uint8_t servoId) {
     return genericWriteMessage(0x6E, servoId, 0x0F0F);
 }
 
 // query for servo turn count
-CAN_message_t getTurnCount(uint8_t servoId) {
+CAN_message_t REG_TURN_COUNT(uint8_t servoId) {
     return genericReadMessage(0x18, servoId);
 }
 
 // query for low value of current position (0 - 65535, 4096 = 90 deg)
-CAN_message_t getPositionLo(uint8_t servoId) {
+CAN_message_t REG_32BITS_POSITION_L(uint8_t servoId) {
     return genericReadMessage(0x1A, servoId);
 }  
 
@@ -92,17 +92,17 @@ uint16_t decodePositionLo(CAN_message_t msg) {
 }
 
 // query for high value of position (65535 - 2^31, 4096 = 90 deg)
-CAN_message_t getPositionHi(uint8_t servoId) {
+CAN_message_t REG_32BITS_POSITION_H(uint8_t servoId) {
     return genericReadMessage(0x1C, servoId);
 } // TODO: write decoder
 
 // queries position register
-CAN_message_t getPosition(uint8_t servoId) {
+CAN_message_t REG_POSITION(uint8_t servoId) {
     return genericReadMessage(0x0C, servoId);
 }
 
 // query for current servo velocity
-CAN_message_t getVoltage(uint8_t servoId) {
+CAN_message_t REG_VOLTAGE(uint8_t servoId) {
     return genericReadMessage(0x12, servoId);
 }
 
@@ -110,3 +110,13 @@ CAN_message_t getVoltage(uint8_t servoId) {
 double decodeVoltage(CAN_message_t msg) {
     return double(genericDecoder(msg)) / 100;
 }
+
+// query mcu temperature
+CAN_message_t REG_MCU_TEMPER(uint8_t servoId) {
+    return genericReadMessage(0x14, servoId);
+}
+
+// decode CAN temperature response 
+uint16_t decodeTemp(CAN_message_t msg) {
+    return genericDecoder(msg);
+} 

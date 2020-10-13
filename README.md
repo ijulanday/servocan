@@ -1,6 +1,22 @@
 # servocan
 A C++ library for use with HITEC CAN servos on Teensy 4.0.
 
+## implemented commands
+*   REG_POSITION_NEW
+*   REG_TURN_NEW
+*   REG_RUN_MODE
+*   REG_CONFIG_SAVE
+*   REG_POWER_CONFIG
+*   REG_POS_MAX
+*   REG_POS_MIN
+*   REG_FACTORY_DEFAULT
+*   REG_TURN_COUNT
+*   REG_32BITS_POSITION_L
+*   REG_32BITS_POSITION_H
+*   REG_POSITION
+*   REG_VOLTAGE
+*   REG_MCU_TEMPER
+
 ## usage
 Just clone into your project, e.g, under /lib if using [platformio](https://platformio.org/). The library just helps with building messages, handling the protocol is something that needs to be done per application. Here's an example of a state machine that moves a servo in increments of 90 degrees:
 ```c
@@ -20,7 +36,7 @@ void setup() {
     Serial.begin(9600); 
 
     // get current position and start at state 4
-    can1.write(getPositionLo(0x00));
+    can1.write(REG_32BITS_POSITION_L(0x00));
     delay(10);
     st = 4;
 }
@@ -30,7 +46,7 @@ void loop() {
     switch (st) {
         case 1:
             // query for position
-            can1.write(getPositionLo(0x00));
+            can1.write(REG_32BITS_POSITION_L(0x00));
             delay(20);
             st = 2;
             break;
@@ -44,7 +60,7 @@ void loop() {
         case 3:
             // update goal position and execute on servo
             pos + 90 > 360 ? posNext = 0 : posNext = pos + 90;
-            can1.write(positionMessage(0x00, posNext));
+            can1.write(REG_POSITION_NEW(0x00, posNext));
             delay(20);
             st = 1;
             break;
@@ -60,6 +76,7 @@ void loop() {
 ```
 
 ## dependencies
-Arduino
+Arduino.h
+math.h
 [FlexCAN_T4](https://github.com/tonton81/FlexCAN_T4/)
 
