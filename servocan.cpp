@@ -30,9 +30,14 @@ CAN_message_t genericReadMessage(uint8_t address, uint8_t servoId) {
     return msg;
 }
 
+// generic decoder for can messages (re-arranges buf segments to single int)
+uint16_t genericDecoder(CAN_message_t msg) {
+    return (uint16_t(msg.buf[5]) << 8) | uint16_t(msg.buf[4]);
+}
+
 // moves servo to an angle from 0 to 360 degrees
 CAN_message_t positionMessage(uint8_t servoId, double usrAngle) {
-    return genericWriteMessage(0x1E, servoId, uint16_t(usrAngle * 4096.0 / 90.0));
+    return genericWriteMessage(0x1E, servoId, uint16_t(round(usrAngle / 90.0 * 4096.0 )));
 }
 
 // +1 rotates servo 360 in the + direction
@@ -80,8 +85,28 @@ CAN_message_t getPositionLo(uint8_t servoId) {
     return genericReadMessage(0x1A, servoId);
 }  
 
+// decodes CAN position response integer value between 0 and 360 
+uint16_t decodePositionLo(CAN_message_t msg) {
+    double raw =  double(genericDecoder(msg));
+    return uint16_t(round(raw * 90.0 / 4096.0));
+}
+
 // query for high value of position (65535 - 2^31, 4096 = 90 deg)
 CAN_message_t getPositionHi(uint8_t servoId) {
     return genericReadMessage(0x1C, servoId);
+} // TODO: write decoder
+
+// queries position register
+CAN_message_t getPosition(uint8_t servoId) {
+    return genericReadMessage(0x0C, servoId);
 }
 
+// query for current servo velocity
+CAN_message_t getVoltage(uint8_t servoId) {
+    return genericReadMessage(0x12, servoId);
+}
+
+// decodes CAN voltage response
+double decodeVoltage(CAN_message_t msg) {
+    return double(genericDecoder(msg)) / 100;
+}
