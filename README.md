@@ -27,29 +27,23 @@ void setup() {
 void loop() {
     switch (st) {
         case 1:
-            Serial.println("State 1");
             can1.write(getPositionLo(0x00));
             delay(20);
             st = 2;
             break;
         case 2:
-            Serial.println("State 2");
             if (can1.read(msg)) {
                 pos = decodePositionLo(msg);
-                Serial.println(pos);
                 (abs(pos - posNext) < 4) ? st = 3 : st = 1;
             }
             break;
         case 3:
-            Serial.println("State 3");
             pos + 90 > 360 ? posNext = 0 : posNext = pos + 90;
-            Serial.print("next position: "); Serial.println(posNext);
             can1.write(positionMessage(0x00, posNext));
             delay(20);
             st = 1;
             break;
         case 4:
-            Serial.println("State 4");
             if (can1.read(msg)) {
                 pos = decodePositionLo(msg);
                 st = 3;
