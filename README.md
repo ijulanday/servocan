@@ -2,20 +2,22 @@
 A C++ library for use with HITEC CAN servos on Teensy 4.0.
 
 ## implemented commands
-*   REG_POSITION_NEW            move to a new angle
-*   REG_TURN_NEW                make a turn (must be in turn mode!)
-*   REG_RUN_MODE                change between angular/turn mode
-*   REG_CONFIG_SAVE             save register config changes
-*   REG_POWER_CONFIG            turn on, off, or restart the servo
-*   REG_POS_MAX                 set max angle
-*   REG_POS_MIN                 set min angle
-*   REG_FACTORY_DEFAULT         reset to factory defaults
-*   REG_TURN_COUNT              request number of completed turns
-*   REG_32BITS_POSITION_L       get low position register value
-*   REG_32BITS_POSITION_H       get high position register value
-*   REG_POSITION                get position 
-*   REG_VOLTAGE                 get servo voltage 
-*   REG_MCU_TEMPER              get MCU temperature 
+| Command                 | Description                             |
+| ----------------------- | --------------------------------------- |
+| REG_POSITION_NEW&nbsp   |   move to a new angle                   |
+| REG_TURN_NEW            |   make a turn (must be in turn mode!)   |
+| REG_RUN_MODE            |   change between angular/turn mode      |
+| REG_CONFIG_SAVE         |   save register config changes          |
+| REG_POWER_CONFIG        |   turn on, off, or restart the servo    |       
+| REG_POS_MAX             |   set max angle                         |
+| REG_POS_MIN             |   set min angle                         |
+| REG_FACTORY_DEFAULT     |   reset to factory defaults             |
+| REG_TURN_COUNT          |   request number of completed turns     |
+| REG_32BITS_POSITION_L   |   get low position register value       |
+| REG_32BITS_POSITION_H   |   get high position register value      |
+| REG_POSITION            |   get position                          |
+| REG_VOLTAGE             |   get servo voltage                     |
+| REG_MCU_TEMPER          |   get MCU temperature                   |
 
 Note that command effectiveness may vary between servo models.
 
