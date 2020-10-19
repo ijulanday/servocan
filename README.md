@@ -18,6 +18,7 @@ A C++ library for use with HITEC CAN servos on Teensy 4.0.
 | REG_POSITION            |   get position                          |
 | REG_VOLTAGE             |   get servo voltage                     |
 | REG_MCU_TEMPER          |   get MCU temperature                   |
+| REG_ID                  |   change servo ID                       |
 
 Note that command effectiveness may vary between servo models.
 
