@@ -80,6 +80,28 @@ void loop() {
 }
 ```
 
+## protocol notes
+
+Here are just a few observations relating to the actual servo CAN protocol. These notes can be infered from the relevant servo documentation, so these serve as a quick digest of some important points.
+
+#### Broadcast commands (ID field 0x00)
+Broadcasting a packet with the ID 0x00 will effect each servo on the CAN bus, i.e. REG_TURN_NEW will cause all servos on the bus to follow this command regardless of their particular address. The servos responses, however, will show 0x00 in their response packet's ID field. When from multiple devices broadcast to on 0x00, one may need to issue the command multiple times as device responses may not all be captured. Usually, however, all devices receive a command on 0x00 successfully first try. 
+
+#### Config changes
+Certain commands that alter the configuration of the servo, i.e. changing the servo's ID or switching between servo and continuous mode, require a configuration save and power cycle. Here's a basic code example, for quick reference:
+
+```c
+    //...
+    can1.write(REG_ID(0x00, id));
+    delay(20);
+    can1.write(REG_CONFIG_SAVE(id));
+    delay(20);
+    can1.write(REG_POWER_CONFIG(id));
+    delay(20);
+    //...
+```   
+
+
 ## dependencies
 *   Arduino.h 
 *   math.h
