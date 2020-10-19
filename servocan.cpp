@@ -1,4 +1,11 @@
 #include "servocan.h"
+// serial printer for CAN messages
+void printRaw(CAN_message_t msg) {
+    for (int i = 0; i < 6; i++) {
+            Serial.print(msg.buf[i], HEX); Serial.print(" ");
+        }
+    Serial.println(" ");
+}
 
 // generic for write messages
 CAN_message_t genericWriteMessage(uint8_t address, uint8_t servoId, uint16_t data) {
@@ -119,4 +126,9 @@ CAN_message_t REG_MCU_TEMPER(uint8_t servoId) {
 // decode CAN temperature response 
 uint16_t decodeTemp(CAN_message_t msg) {
     return genericDecoder(msg);
-} 
+}
+
+// assigns a servo a new ID. not sure how this works for multiple servos on one can line
+CAN_message_t REG_ID(uint8_t servoId, uint16_t newId) {
+    return genericWriteMessage(0x32, servoId, newId);
+}   // requires config save and reset
