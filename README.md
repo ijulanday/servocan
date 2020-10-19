@@ -1,5 +1,5 @@
 # servocan
-A C++ library for use with HITEC CAN servos on Teensy 4.0.
+A C++ library for use with HITEC CAN servos on Teensy 4.0 & 4.1.
 
 ## implemented commands
 | Command                 | Description                             |
