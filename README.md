@@ -39,10 +39,6 @@ void setup() {
     can1.begin();
     can1.setBaudRate(1000000);
     Serial.begin(9600); 
-
-    // get current position and start at state 4
-    can1.write(REG_32BITS_POSITION_L(0x00));
-    delay(10);
     st = 4;
 }
 
@@ -51,7 +47,7 @@ void loop() {
     switch (st) {
         case 1:
             // query for position
-            can1.write(REG_32BITS_POSITION_L(0x00));
+            REG_32BITS_POSITION_L(0x00, &can1);
             delay(20);
             st = 2;
             break;
@@ -65,7 +61,7 @@ void loop() {
         case 3:
             // update goal position and execute on servo
             pos + 90 > 360 ? posNext = 0 : posNext = pos + 90;
-            can1.write(REG_POSITION_NEW(0x00, posNext));
+            REG_POSITION_NEW(0x00, posNext, &can1);
             delay(20);
             st = 1;
             break;
@@ -92,11 +88,11 @@ Certain commands that alter the configuration of the servo, i.e. changing the se
 
 ```c
     //...
-    can1.write(REG_ID(0x00, id));
+    REG_ID(0x00, id, &can1);
     delay(20);
-    can1.write(REG_CONFIG_SAVE(id));
+    REG_CONFIG_SAVE(id, &can1);
     delay(20);
-    can1.write(REG_POWER_CONFIG(id));
+    REG_POWER_CONFIG(id, &can1);
     delay(20);
     //...
 ```   
