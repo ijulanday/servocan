@@ -84,6 +84,12 @@ void REG_FACTORY_DEFAULT(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_
       genericWriteMessage(0x6E, servoId, 0x0F0F, can);
 }
 
+// change velocity max speed
+void REG_VELOCITY_MAX(uint8_t servoId, int RPM, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+    double speed = RPM * 27.33;
+    genericWriteMessage(0x54, servoId, speed, can);
+}
+
 // query for servo turn count
 void REG_TURN_COUNT(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericReadMessage(0x18, servoId, can);
