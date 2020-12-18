@@ -95,6 +95,11 @@ void REG_TURN_COUNT(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* 
       genericReadMessage(0x18, servoId, can);
 }
 
+// decodes reported turn count
+int16_t decodeTurnCount(CAN_message_t msg) {
+      return (int16_t)genericDecoder(msg);
+}
+
 // query for low value of current position (0 - 65535, 4096 = 90 deg)
 void REG_32BITS_POSITION_L(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericReadMessage(0x1A, servoId, can);

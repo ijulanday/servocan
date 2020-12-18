@@ -15,6 +15,7 @@ void REG_POS_MIN(uint8_t servoId, double minAngle, FlexCAN_T4<CAN1, RX_SIZE_256,
 void REG_FACTORY_DEFAULT(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_VELOCITY_MAX(uint8_t servoId, int RPM, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_TURN_COUNT(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+int16_t decodeTurnCount(CAN_message_t msg);
 void REG_32BITS_POSITION_L(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 uint16_t decodePositionLo(CAN_message_t msg);
 void REG_32BITS_POSITION_H(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
