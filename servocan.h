@@ -20,7 +20,7 @@ uint16_t decodePositionLo(CAN_message_t msg);
 void REG_32BITS_POSITION_H(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_POSITION(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_VOLTAGE(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-double decodeVoltage(CAN_message_t msg, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+double decodeVoltage(CAN_message_t msg);
 void REG_MCU_TEMPER(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 uint16_t decodeTemp(CAN_message_t msg);
 void REG_ID(uint8_t servoId, uint16_t newId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);

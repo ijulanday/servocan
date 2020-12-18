@@ -64,7 +64,7 @@ void REG_CONFIG_SAVE(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>*
       genericWriteMessage(0x70, servoId, 0xFFFF, can);
 }
 
-// resets the servo
+// resets servo, applies config changes
 void REG_POWER_CONFIG(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericWriteMessage(0x46, servoId, 0x0001, can);
 }
@@ -101,8 +101,8 @@ void REG_32BITS_POSITION_L(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZ
 }  
 
 // decodes CAN position response integer value between 0 and 360 
-uint16_t decodePositionLo() {
-    double raw =  double(genericDecoder(servo_message));
+uint16_t decodePositionLo(CAN_message_t msg) {
+    double raw =  double(genericDecoder(msg));
     return uint16_t(round(raw * 90.0 / 4096.0));
 }
 
@@ -122,8 +122,8 @@ void REG_VOLTAGE(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can
 }
 
 // decodes CAN voltage response
-double decodeVoltage() {
-    return double(genericDecoder(servo_message)) / 100;
+double decodeVoltage(CAN_message_t msg) {
+    return double(genericDecoder(msg)) / 100;
 }
 
 // query mcu temperature
@@ -132,8 +132,8 @@ void REG_MCU_TEMPER(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* 
 }
 
 // decode CAN temperature response 
-uint16_t decodeTemp() {
-    return genericDecoder(servo_message);
+uint16_t decodeTemp(CAN_message_t msg) {
+    return genericDecoder(msg);
 }
 
 // assigns a servo a new ID. not sure how this works for multiple servos on one can line
