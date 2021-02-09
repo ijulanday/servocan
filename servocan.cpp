@@ -70,12 +70,12 @@ void REG_POWER_CONFIG(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>
 }
 
 // sets position max limit(s)
-void REG_POS_MAX(uint8_t servoId, double maxAngle, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+void REG_POSITION_MAX_LIMIT(uint8_t servoId, double maxAngle, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericWriteMessage(0xB0, servoId, maxAngle, can);
 }
 
 // sets position min limit(s)
-void REG_POS_MIN(uint8_t servoId, double minAngle, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+void REG_POSITION_MIN_LIMIT(uint8_t servoId, double minAngle, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericWriteMessage(0xB2, servoId, minAngle, can);
 }
 
