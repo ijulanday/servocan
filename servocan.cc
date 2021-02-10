@@ -44,9 +44,14 @@ uint16_t genericDecoder(CAN_message_t msg) {
     return (uint16_t(msg.buf[5]) << 8) | uint16_t(msg.buf[4]);
 }
 
-// moves servo to an angle from 0 to 360 degrees
+// moves servo to an angle from -180 to 180 degrees
 void REG_POSITION_NEW(uint8_t servoId, double usrAngle, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
-      genericWriteMessage(0x1E, servoId, uint16_t(round(usrAngle / 90.0 * 4096.0 )), can);
+      genericWriteMessage(0x1E, servoId, uint16_t(usrAngle*ANGLE_CONVERSION+8192), can);
+}
+
+// moves servo to a new angle using raw register values (0 to 360 is 0 - 16383)
+void REG_POSITION_NEW_RAW(uint8_t servoId, uint16_t regVal, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(0x1E, servoId, regVal, can);
 }
 
 // +1 rotates servo 360 in the + direction
@@ -105,10 +110,10 @@ void REG_32BITS_POSITION_L(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZ
       genericReadMessage(0x1A, servoId, can);
 }  
 
-// decodes CAN position response integer value between 0 and 360 
-uint16_t decodePositionLo(CAN_message_t msg) {
+// decodes CAN position response integer value between -180 and 180 
+double decodePositionLo(CAN_message_t msg) {
     double raw =  double(genericDecoder(msg));
-    return uint16_t(round(raw / ANGLE_CONVERSION));
+    return ((raw - 8192) / ANGLE_CONVERSION);
 }
 
 // query for high value of position (65535 - 2^31, 4096 = 90 deg)
@@ -116,10 +121,10 @@ void REG_32BITS_POSITION_H(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZ
       genericReadMessage(0x1C, servoId, can);
 } // TODO: write decoder
 
-// queries position register
-void REG_POSITION(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
-      genericReadMessage(0x0C, servoId, can);
-}
+// // this is BROKEN and I DON'T KNOW WHY (problem exists on hitec prog too)
+// void REG_POSITION(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+//       genericReadMessage(0x0C, servoId, can);
+// }
 
 // query for current servo velocity
 void REG_VOLTAGE(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {

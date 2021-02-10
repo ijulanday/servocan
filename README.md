@@ -54,7 +54,7 @@ void loop() {
         case 2:
             // move to update state if goal is reached
             if (can1.read(msg)) {
-                pos = decodePositionLo(msg);
+                pos = decodePosition(msg);
                 (abs(pos - posNext) < 4) ? st = 3 : st = 1;
             }
             break;
@@ -68,7 +68,7 @@ void loop() {
         case 4:
             // initially update position
             if (can1.read(msg)) {
-                pos = decodePositionLo(msg);
+                pos = decodePosition(msg);
                 st = 3;
             }
             break;
