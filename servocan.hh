@@ -2,6 +2,8 @@
 #include <FlexCAN_T4.h>
 #include <math.h>
 
+#define ANGLE_CONVERSION 45.5111111 // 4096 units / 90 degrees
+
 #ifndef SERVOCAN_H
 #define SERVOCAN_H
 void printRaw(CAN_message_t msg);

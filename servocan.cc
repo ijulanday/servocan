@@ -1,4 +1,4 @@
-#include "servocan.h"
+#include "servocan.hh"
 
 CAN_message_t servo_message;
 
@@ -108,7 +108,7 @@ void REG_32BITS_POSITION_L(uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZ
 // decodes CAN position response integer value between 0 and 360 
 uint16_t decodePositionLo(CAN_message_t msg) {
     double raw =  double(genericDecoder(msg));
-    return uint16_t(round(raw * 90.0 / 4096.0));
+    return uint16_t(round(raw / ANGLE_CONVERSION));
 }
 
 // query for high value of position (65535 - 2^31, 4096 = 90 deg)
