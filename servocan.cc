@@ -154,12 +154,12 @@ void REG_ID(uint32_t canId, bool extended, uint8_t servoId, uint16_t newId, Flex
 }   // requires config save and reset
 
 // sets CAN mode (0 for 2.0, 1 for 2.0B)
-void REG_CAN_MODE(uint32_t canId, uint16_t servoId, bool mode, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+void REG_CAN_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericWriteMessage(canId, extended, 0x6A, servoId, mode, can);
 }
 
 // sets high word for CAN bus ID (requires power cycle)
-void REG_CAN_BUS_ID_H(uint32_t currCanId, uint16_t newCanIdH, uint16_t servoId, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+void REG_CAN_BUS_ID_H(uint32_t currCanId, bool extended, uint16_t newCanIdH, uint16_t servoId,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       if (newCanIdH > 8191) {
             Serial.println("newCanIdH exceeds acceptable value");
             return;
@@ -169,7 +169,7 @@ void REG_CAN_BUS_ID_H(uint32_t currCanId, uint16_t newCanIdH, uint16_t servoId, 
 }
 
 // sets low word for CAN bus ID (requires power cycle)
-void REG_CAN_BUS_ID_L(uint32_t currCanId, uint16_t newCanIdL, uint16_t servoId, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+void REG_CAN_BUS_ID_L(uint32_t currCanId, bool extended, uint16_t newCanIdL, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       if (newCanIdL > 65535) {
             Serial.println("newCanIdH exceeds acceptable value");
             return;

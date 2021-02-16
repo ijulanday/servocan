@@ -37,9 +37,9 @@ double decodeVoltage(CAN_message_t msg);
 void REG_MCU_TEMPER(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 uint16_t decodeTemp(CAN_message_t msg);
 void REG_ID(uint32_t canId, bool extended, uint8_t servoId, uint16_t newId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_CAN_MODE(uint32_t canId, uint16_t servoId, bool mode, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_CAN_BUS_ID_H(uint32_t currCanId, uint16_t newCanIdH, uint16_t servoId, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_CAN_BUS_ID_L(uint32_t currCanId, uint16_t newCanIdL, uint16_t servoId, bool extended, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void REG_CAN_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void REG_CAN_BUS_ID_L(uint32_t currCanId, bool extended, uint16_t newCanIdL, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void REG_CAN_BUS_ID_H(uint32_t currCanId, bool extended, uint16_t newCanIdH, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 extern CAN_message_t servo_message;
 
 #endif
