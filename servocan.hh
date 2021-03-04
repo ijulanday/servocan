@@ -29,7 +29,7 @@ void REG_FACTORY_DEFAULT(uint32_t canId, bool extended,  uint8_t servoId, FlexCA
 void REG_VELOCITY_MAX(uint32_t canId, bool extended,  uint8_t servoId, int RPM, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_TURN_COUNT(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 int16_t decodeTurnCount(CAN_message_t msg);
-void REG_32BITS_POSITION_L(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void REG_32BITS_POSITION_L(uint32_t canId, bool extended, uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 double decodePositionLo(CAN_message_t msg);
 void REG_32BITS_POSITION_H(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_VOLTAGE(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
