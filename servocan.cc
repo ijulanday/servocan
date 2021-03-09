@@ -97,6 +97,11 @@ void REG_VELOCITY_MAX(uint32_t canId, bool extended,  uint8_t servoId, int RPM, 
     genericWriteMessage(canId, extended,  0x54, servoId, speed, can);
 }
 
+// query for current servo velocity
+void REG_VELOCITY(uint32_t canId, bool extended, uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericReadMessage(canId, extended, 0x0E, servoId, can);
+}
+
 // query for servo turn count
 void REG_TURN_COUNT(uint32_t canId, uint8_t servoId, bool extended,  FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericReadMessage(canId, extended, 0x18, servoId, can);
