@@ -184,10 +184,14 @@ void write_REG_USER_1(uint32_t canId, bool extended, uint16_t servoId, uint16_t 
 }
 
 // write to user memory 2
-void write_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
-      genericReadMessage(canId, extended, 0xCE, servoId, can);
+void write_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, uint16_t data, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0xCE, servoId, data, can);
 }
 
+// write to reg_echo (volitile memory)
+void write_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericReadMessage(canId, extended, 0xC6, servoId, can);
+}
 // read user memory 1
 void read_REG_USER_1(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericReadMessage(canId, extended, 0xCC, servoId, can);
@@ -196,6 +200,11 @@ void read_REG_USER_1(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4
 // read user memory 2
 void read_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
       genericReadMessage(canId, extended, 0xCE, servoId, can);
+}
+
+// read reg echo
+void read_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericReadMessage(canId, extended, 0xC6, servoId, can);
 }
 
 

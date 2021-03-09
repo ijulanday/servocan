@@ -41,10 +41,11 @@ void REG_CAN_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode, Fl
 void REG_CAN_BUS_ID_L(uint32_t currCanId, bool extended, uint16_t newCanIdL, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_CAN_BUS_ID_H(uint32_t currCanId, bool extended, uint16_t newCanIdH, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void write_REG_USER_1(uint32_t canId, bool extended, uint16_t servoId, uint16_t data, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void write_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void write_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, uint16_t data, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+void write_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, uint16_t data, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void read_REG_USER_1(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void read_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-
+void read_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 extern CAN_message_t servo_message;
 
 #endif
