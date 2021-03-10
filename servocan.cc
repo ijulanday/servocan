@@ -222,6 +222,25 @@ void REG_STREAM_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode,
       genericWriteMessage(canId, extended, 0x30, servoId, mode, can);
 }
 
+// sets custom stream address 0
+void REG_STREAM_ADDR_0(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0xE2, servoId, ((uint16_t)(addr0) << 8) | (uint16_t)addr1, can);
+}
+
+// sets custom stream address 1
+void REG_STREAM_ADDR_1(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0xE4, servoId, ((uint16_t)(addr0) << 8) | (uint16_t)addr1, can);
+}
+
+// sets custom stream address 2
+void REG_STREAM_ADDR_2(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0xE6, servoId, ((uint16_t)(addr0) << 8) | (uint16_t)addr1, can);
+}
+
+// sets custom stream address 3
+void REG_STREAM_ADDR_3(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0xE8, servoId, ((uint16_t)(addr0) << 8) | (uint16_t)addr1, can);
+}
 
 
 
