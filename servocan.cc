@@ -219,7 +219,7 @@ void REG_STREAM_TIME(uint32_t canId, bool extended, uint16_t servoId, uint16_t p
 
 // sets stream mode (0 off, 1 on)
 void REG_STREAM_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
-      genericWriteMessage(canId, extended, 0x2E, servoId, mode, can);
+      genericWriteMessage(canId, extended, 0x30, servoId, mode, can);
 }
 
 
