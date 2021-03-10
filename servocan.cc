@@ -212,6 +212,16 @@ void read_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<C
       genericReadMessage(canId, extended, 0xC6, servoId, can);
 }
 
+// sets stream time
+void REG_STREAM_TIME(uint32_t canId, bool extended, uint16_t servoId, uint16_t periodMs, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0x2E, servoId, periodMs, can);
+}
+
+// sets stream mode (0 off, 1 on)
+void REG_STREAM_TIME(uint32_t canId, bool extended, uint16_t servoId, bool mode, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+      genericWriteMessage(canId, extended, 0x2E, servoId, mode, can);
+}
+
 
 
 
