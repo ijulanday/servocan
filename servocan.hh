@@ -49,10 +49,10 @@ void read_REG_USER_2(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4
 void read_REG_ECHO(uint32_t canId, bool extended, uint16_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_STREAM_TIME(uint32_t canId, bool extended, uint16_t servoId, uint16_t periodMs, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 void REG_STREAM_MODE(uint32_t canId, bool extended, uint16_t servoId, bool mode, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_STREAM_ADDR_0(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_STREAM_ADDR_1(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_STREAM_ADDR_2(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
-void REG_STREAM_ADDR_3(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+// void REG_STREAM_ADDR_0(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+// void REG_STREAM_ADDR_1(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+// void REG_STREAM_ADDR_2(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
+// void REG_STREAM_ADDR_3(uint32_t canId, bool extended, uint16_t servoId, uint8_t addr0, uint8_t addr1, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can);
 
 extern CAN_message_t servo_message;
 
