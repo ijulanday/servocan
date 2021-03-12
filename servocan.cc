@@ -15,6 +15,7 @@ void printRaw(CAN_message_t servo_message) {
 void genericWriteMessage(uint32_t canId, bool extended, uint8_t address, uint8_t servoId, uint16_t data, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
     uint8_t lo = data & 0x00FF;
     uint8_t hi = data >> 8;
+    servo_message.len = 7;
     servo_message.id = canId;         // specify hitec servo CAN ID (0x000 if default)
     servo_message.flags.extended = extended;
     servo_message.buf[0] = 0x96;      // write message header
@@ -30,6 +31,7 @@ void genericWriteMessage(uint32_t canId, bool extended, uint8_t address, uint8_t
 
 // generic for read messages
 void genericReadMessage(uint32_t canId, bool extended, uint8_t address, uint8_t servoId, FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16>* can) {
+    servo_message.len = 5;
     servo_message.id = canId;
     servo_message.flags.extended = extended;
     servo_message.buf[0] = 0x96;
