@@ -33,7 +33,7 @@ int16_t decodeTurnCount(CAN_message_t msg);
 CAN_message_t REG_32BITS_POSITION_L(uint32_t canId, bool extended, uint8_t servoId);
 double decodePositionLo(CAN_message_t msg);
 CAN_message_t REG_32BITS_POSITION_H(uint32_t canId, uint8_t servoId, bool extended);
-CAN_message_t REG_VOLTAGE(uint32_t canId, uint8_t servoId, bool extended,;
+CAN_message_t REG_VOLTAGE(uint32_t canId, uint8_t servoId, bool extended);
 double decodeVoltage(CAN_message_t msg);
 CAN_message_t REG_MCU_TEMPER(uint32_t canId, uint8_t servoId, bool extended);
 uint16_t decodeTemp(CAN_message_t msg);
